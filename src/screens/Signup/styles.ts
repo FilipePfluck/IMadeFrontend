@@ -16,8 +16,12 @@ export const Content = styled.aside`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    flex: 1;
     max-width: 700px;
+    height: 100vh;
+    overflow:scroll;
+    overflow-x:hidden;
+    padding: 48px 0;
 `
 
 const appearFromRight = keyframes`
@@ -37,6 +41,7 @@ export const AnimationContainer = styled.div`
     align-items: center;
     justify-content: center;
     animation: ${appearFromRight} 1s;
+
     form {
         margin: 80px 0px;
         width: 340px;
@@ -121,5 +126,15 @@ export const SelectOption = styled.div<SelectOptionProps>`
                     color: ${props => props.theme.colors.primary};
                 ` 
             }
+    }
+`
+
+export const AddressTextContainer = styled.div`
+    margin-top: 32px;
+    margin-bottom: 24px;
+
+    p{
+        margin-top: 8px;
+        color: ${props => props.theme.colors.subtitle};
     }
 `

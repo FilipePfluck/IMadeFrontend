@@ -15,6 +15,8 @@ import {
     FiMapPin
 } from 'react-icons/fi'
 
+import { Scrollbars } from 'react-custom-scrollbars'
+
 //import api from '../../services/apiClient'
 //import getValidationErrors from '../../utils/getValidationErrors'
 
@@ -85,69 +87,98 @@ const SignUp: React.FC = () => {
     return (
         <S.Container>
             <S.Background/>
-            <S.Content>
-                <S.AnimationContainer>
-                    <h1>IMade</h1>
+                <S.Content>
+                    <S.AnimationContainer>
+                        <h1>IMade</h1>
 
-                    <Form onSubmit={()=>{}}>
-                        <h1>Faça seu cadastro</h1>
+                        <Form onSubmit={()=>{}}>
+                            <h1>Faça seu cadastro</h1>
 
-                        <S.SelectOption selectedOption={selectedOption}>
-                                <strong 
-                                    id="client"
-                                    onClick={()=>{setSelectedOption('client')}}
-                                >
-                                    Sou cliente
-                                </strong>
-                                <strong 
-                                    id="provider"
-                                    onClick={()=>{setSelectedOption('provider')}}
-                                >
-                                    Sou prestador
-                                </strong>
-                        </S.SelectOption>
+                            <S.SelectOption selectedOption={selectedOption}>
+                                    <strong 
+                                        id="client"
+                                        onClick={()=>{setSelectedOption('client')}}
+                                    >
+                                        Sou cliente
+                                    </strong>
+                                    <strong 
+                                        id="provider"
+                                        onClick={()=>{setSelectedOption('provider')}}
+                                    >
+                                        Sou prestador
+                                    </strong>
+                            </S.SelectOption>
 
-                        <Input 
-                            name="name" 
-                            placeholder="Nome"
-                            icon={FiUser}
-                        />
-                        <Input 
-                            name="phone" 
-                            placeholder="Número de telefone" 
-                            icon={FiPhone}
-                        />
-                        <Input 
-                            name="email"
-                            placeholder="Email"
-                            icon={FiMail}
-                        />
-                        <Input 
-                            name="password" 
-                            type="password" 
-                            placeholder="Senha" 
-                            icon={FiLock}
-                        />
-                        
-                        {selectedOption === 'provider' && (
                             <Input 
-                                name="city" 
-                                placeholder="Cidade" 
-                                icon={FiMapPin}
+                                name="name" 
+                                placeholder="Nome"
+                                icon={FiUser}
                             />
-                        )}
-                    
-                        <Button type="submit" >Cadastrar</Button>
-                    </Form>
+                            <Input 
+                                name="phone" 
+                                placeholder="Número de telefone" 
+                                icon={FiPhone}
+                            />
+                            <Input 
+                                name="email"
+                                placeholder="Email"
+                                icon={FiMail}
+                            />
+                            <Input 
+                                name="password" 
+                                type="password" 
+                                placeholder="Senha" 
+                                icon={FiLock}
+                            />
+                            
+                            {selectedOption === 'provider' && (
+                                <Input 
+                                    name="city" 
+                                    placeholder="Cidade" 
+                                    icon={FiMapPin}
+                                />
+                            )}
 
-                    <Link href="/signin"> 
-                        <S.LinkContent>
-                        <FiArrowLeft/>  
-                        Voltar
-                        </S.LinkContent>
-                    </Link>
-                </S.AnimationContainer>
-            </S.Content>
+                            {selectedOption === 'client' && (
+                                <>
+                                <S.AddressTextContainer>
+                                    <h2>Endereço</h2>
+                                    <p>Ele só vai aparecer para quem você contratar.</p>
+                                </S.AddressTextContainer>
+                                <Input 
+                                    name="city" 
+                                    placeholder="Cidade" 
+                                    icon={FiMapPin}
+                                />
+                                <Input 
+                                    name="bairro" 
+                                    placeholder="Bairro" 
+                                    icon={FiMapPin}
+                                />
+                                <Input 
+                                    name="street" 
+                                    placeholder="Rua" 
+                                    icon={FiMapPin}
+                                />
+                                <Input 
+                                    name="number" 
+                                    placeholder="Número" 
+                                    icon={FiMapPin}
+                                />
+                                </>
+                            )}
+
+                            <Button type="submit" >Cadastrar</Button>
+                        </Form>
+
+                        <Link href="/signin"> 
+                            <S.LinkContent>
+                            <FiArrowLeft/>  
+                            Voltar
+                            </S.LinkContent>
+                        </Link>
+                    </S.AnimationContainer>
+                </S.Content>
         </S.Container>
     )
 }

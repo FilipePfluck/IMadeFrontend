@@ -22,4 +22,16 @@ export default createGlobalStyle `
         cursor: pointer;
     }
     
+    ::-webkit-scrollbar{
+        width: 12px;
+    }
+
+    ::-webkit-scrollbar-track{
+        background: ${props => props.theme.colors.background};
+    }
+
+    ::-webkit-scrollbar-thumb{
+        background: ${props => props.theme.colors.shape};
+        border-radius: 6px;
+    }
 `
