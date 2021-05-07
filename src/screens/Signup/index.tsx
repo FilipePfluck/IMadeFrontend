@@ -5,6 +5,8 @@ import { Form } from '@unform/web'
 import { FormHandles } from '@unform/core'
 //import * as yup from 'yup'
 
+import Scrollbar from 'react-perfect-scrollbar'
+
 import * as S from './styles'
 import { 
     FiArrowLeft, 
@@ -87,7 +89,7 @@ const SignUp: React.FC = () => {
     return (
         <S.Container>
             <S.Background/>
-                <S.Content>
+            <S.Content>
                     <S.AnimationContainer>
                         <h1>IMade</h1>
 
@@ -178,7 +180,8 @@ const SignUp: React.FC = () => {
                             </S.LinkContent>
                         </Link>
                     </S.AnimationContainer>
-                </S.Content>
+                    <Scrollbar/>
+            </S.Content>
         </S.Container>
     )
 }

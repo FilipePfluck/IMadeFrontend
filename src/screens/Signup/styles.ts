@@ -15,10 +15,10 @@ export const Content = styled.aside`
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    flex: 1;
-    max-width: 700px;
-    height: 100vh;
+
+    width: 100%;
+    max-width: 600px;
+    
     overflow:scroll;
     overflow-x:hidden;
     padding: 48px 0;
@@ -41,10 +41,10 @@ export const AnimationContainer = styled.div`
     align-items: center;
     justify-content: center;
     animation: ${appearFromRight} 1s;
-
     form {
-        margin: 80px 0px;
+        margin: 40px 0px;
         width: 340px;
+
         text-align: center;
         h1 {
             margin-bottom: 24px;
@@ -59,21 +59,6 @@ export const AnimationContainer = styled.div`
             &:hover{
                 filter: brightness(0.8)
             }
-        }
-    }
-    > a{
-        color: #ff9000;
-        text-decoration: none;
-        display: block;
-        margin-top: 24px;
-        transition: 0.2s;
-        display: flex;
-        align-items: center;
-        &:hover{
-            filter: brightness(0.8)
-        }
-        svg{
-            margin-right: 8px;
         }
     }
 `
@@ -132,6 +117,7 @@ export const SelectOption = styled.div<SelectOptionProps>`
 export const AddressTextContainer = styled.div`
     margin-top: 32px;
     margin-bottom: 24px;
+    max-width: 100%;
 
     p{
         margin-top: 8px;

@@ -1,7 +1,7 @@
 import styled, {keyframes}  from 'styled-components'
 
 export const Container = styled.div`
-    min-height: 100vh;
+    height: 100vh;
     
     display: flex;
     align-items: stretch;
@@ -13,7 +13,7 @@ export const Content = styled.aside`
     align-items: center;
     justify-content: center;
     width: 100%;
-    max-width: 700px;
+    max-width: 600px;
 `
 
 const appearFromLeft = keyframes`
