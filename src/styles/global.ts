@@ -21,7 +21,9 @@ export default createGlobalStyle `
     button {
         cursor: pointer;
     }
-    
+    textarea {
+        font-family: "Roboto Slab", serif;
+    }
     ::-webkit-scrollbar{
         width: 12px;
     }
