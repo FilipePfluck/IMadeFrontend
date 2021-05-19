@@ -6,7 +6,7 @@ import Order from '../../components/Appointment'
 const Orders = () => {
     return(
         <S.Container>
-            <Header/>
+            <Header shouldGoBack/>
             <S.Content>
                 <S.Title>Pedidos na sua cidade</S.Title>
                 <S.Grid>

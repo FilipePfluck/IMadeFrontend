@@ -5,8 +5,6 @@ import { Form } from '@unform/web'
 import { FormHandles } from '@unform/core'
 //import * as yup from 'yup'
 
-import Scrollbar from 'react-perfect-scrollbar'
-
 import * as S from './styles'
 import { 
     FiArrowLeft, 
@@ -16,8 +14,6 @@ import {
     FiPhone,
     FiMapPin
 } from 'react-icons/fi'
-
-import { Scrollbars } from 'react-custom-scrollbars'
 
 //import api from '../../services/apiClient'
 //import getValidationErrors from '../../utils/getValidationErrors'
@@ -180,7 +176,6 @@ const SignUp: React.FC = () => {
                             </S.LinkContent>
                         </Link>
                     </S.AnimationContainer>
-                    <Scrollbar/>
             </S.Content>
         </S.Container>
     )
