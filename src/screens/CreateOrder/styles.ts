@@ -18,7 +18,7 @@ export const Content = styled.div`
     flex-direction: column;
     align-items: center;
 
-    button{
+    .button{
         width: 320px;
         margin: 32px auto;
     }

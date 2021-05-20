@@ -93,7 +93,7 @@ const CreateOrder = () => {
                         </div>
                     </S.Form>
                 </UnformForm>
-                <Button>
+                <Button className="button">
                     Criar pedido
                 </Button>
             </S.Content>
