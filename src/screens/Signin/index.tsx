@@ -1,4 +1,4 @@
-import React, {useRef, useCallback } from 'react'
+import React, {useRef, useCallback, useState } from 'react'
 import Link from 'next/link'
 //import { Link, useHistory } from 'react-router-dom'
 
@@ -14,7 +14,7 @@ import * as S from './styles'
 import Input from '../../components/Input'
 import Button from '../../components/Button'
 
-//import {useAuth} from '../../context/AuthContext'
+import {useAuth} from '../../contexts/authContext'
 //import {useToast} from '../../context/ToastContext'
 
 //import logoImg from '../../assets/logo.svg'
@@ -25,72 +25,39 @@ interface SignInFormData {
 }
 
 const SignIn: React.FC = () => {
-    /*const formRef = useRef<FormHandles>(null)
-    const history = useHistory()
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
 
-    const {signIn, user} = useAuth()
-    const {addToast} = useToast()
+    const { signIn } = useAuth()
 
-    console.log(user)
+    const handleSubmit = async () => {
+        await signIn({
+            email,
+            password
+        })
+    }
 
-    const handleSubmit = useCallback(async (data: SignInFormData) =>{
-        try{
-            formRef.current?.setErrors({})
-
-            const schema = yup.object().shape({
-                email: yup.string()
-                    .required('Preencha o email')
-                    .email('Digite um email válido'),
-                password: yup.string()
-                    .required('Preencha a senha')
-            })
-
-            await schema.validate(data, {
-                abortEarly: false
-            })
-
-            await signIn({
-                email: data.email,
-                password: data.password
-            })
-
-            history.push('/dashboard')
-        }catch (err){
-            if(err instanceof yup.ValidationError){
-                const errors = getValidationErrors(err)
-
-                formRef.current?.setErrors(errors)
-
-                return
-            }
-
-            addToast({
-                type: 'error',
-                title: 'Erro na autenticação',
-                description: 'Não foi possível fazer login. Verifique as credenciais'
-            })
-        }
-    },[signIn, addToast, history])*/
-    
     return (
         <S.Container>
             <S.Content>
                 <S.AnimationContainer>
                     <h1>IMade</h1>
 
-                    <Form onSubmit={()=>{}}>
+                    <Form onSubmit={handleSubmit}>
                         <h1>Faça seu login</h1>
 
                         <Input 
                             name="email" 
                             placeholder="Email"
                             icon={FiMail}
+                            onChange={(e)=>setEmail(e.target.value)}
                         />
                         <Input 
                             name="password" 
                             type="password" 
                             placeholder="Senha" 
                             icon={FiLock}
+                            onChange={(e)=>setPassword(e.target.value)}
                         />
                         
                         <Button type="submit" >Entrar</Button>

@@ -8,8 +8,16 @@ import Header from '../../components/Header'
 import Appointment from '../../components/Appointment'
 import Order from '../../components/Order'
 import Button from '../../components/Button'
+import { useAuth } from '../../contexts/authContext'
+import { useEffect } from 'react'
 
 const Dashboard = ()=>{
+    const { user } = useAuth()
+
+    useEffect(()=>{
+        console.log(user)
+    },[user])
+
     return(
         <S.Container>
             <Header/>
