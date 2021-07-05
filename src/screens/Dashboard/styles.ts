@@ -2,7 +2,6 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
     min-height: 100vh;
-    width: 100vw;
     background: ${props => props.theme.colors.background};
 `
 
@@ -36,3 +35,6 @@ export const List = styled.li`
     margin-top: 24px;
 `
 
+export const EmptyContentText = styled.strong`
+    font-size: 18px;
+`

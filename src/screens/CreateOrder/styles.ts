@@ -6,7 +6,6 @@ import { Form as UnformForm } from '@unform/web'
 
 export const Container = styled.div`
     min-height: 100vh;
-    width: 100vw;
     background: ${props => props.theme.colors.background};
 `
 

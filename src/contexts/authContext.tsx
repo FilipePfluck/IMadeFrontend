@@ -4,6 +4,8 @@ import { setCookie, parseCookies, destroyCookie } from 'nookies'
 
 import api from '../services/api'
 
+import { User } from '../types/User'
+
 type Credentials = {
     email: string
     password: string
@@ -16,13 +18,7 @@ type AuthContextData = {
     user: User
 }
 
-type User = {
-    id: string
-    email: string
-    name: string
-    is_provider: boolean,
-    phone_number: string
-}
+
 
 const AuthContext = createContext({} as AuthContextData)
 
@@ -67,6 +63,11 @@ export function AuthProvider({children}){
                 path: '/'
             })
 
+            setCookie(undefined, 'imade.user', JSON.stringify({user, client, provider}), {
+                maxAge: 60 * 60 * 24 * 30, // 30 days
+                path: '/'
+            })
+
             setUser({
                 email,
                 ...user,
@@ -76,7 +77,11 @@ export function AuthProvider({children}){
 
             //authChannel.postMessage('signin')
 
-            api.defaults.headers['Authorization'] = `Bearer ${token}`
+            console.log(`Bearer ${token}`)
+
+            api.defaults.headers['authorization'] = `Bearer ${token}`
+
+            console.log(api.defaults.headers)
 
             push('/dashboard')
         }catch(error){

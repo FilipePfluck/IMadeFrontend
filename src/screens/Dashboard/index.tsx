@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import Link from 'next/link'
 
@@ -10,13 +10,26 @@ import Order from '../../components/Order'
 import Button from '../../components/Button'
 import { useAuth } from '../../contexts/authContext'
 import { useEffect } from 'react'
+import api from '../../services/api'
 
 const Dashboard = ()=>{
     const { user } = useAuth()
 
+    const [acceptedOrders, setAcceptedOrders] = useState([])
+    const [pendingOrders, setPendingOrders] = useState([])
+
     useEffect(()=>{
-        console.log(user)
-    },[user])
+        api.get(`/orders/accepted/client/${user.client.id}`).then(response => {
+            setAcceptedOrders(response.data)
+        })
+    },[])
+
+    useEffect(()=>{
+        api.get(`/orders/pending/client/${user.client.id}`).then(response => {
+            console.log(response.data)
+            setPendingOrders(response.data)
+        })
+    },[])
 
     return(
         <S.Container>
@@ -25,39 +38,35 @@ const Dashboard = ()=>{
                 <S.Section>
                     <h2>Seus agendamentos</h2>
                     <S.List>
-                        <Appointment
-                            name="Faxina simples"
-                            provider="prestador 1"
-                            day="15 de Maio"
-                            hour="16 horas"
-                        />
-                        <Appointment
-                            name="Faxina média"
-                            provider="prestador 2"
-                            day="16 de Maio"
-                            hour="16 horas"
-                        />
-                        <Appointment
-                            name="Faxina completa"
-                            provider="prestador 3"
-                            day="17 de Maio"
-                            hour="16 horas"
-                        />
+                        {acceptedOrders.length === 0 
+                            ?   <S.EmptyContentText>
+                                    Parece que você não tem nenhum agendamento marcado
+                                </S.EmptyContentText>
+                            : acceptedOrders.map(order => (
+                                <Appointment
+                                    name="Faxina simples"
+                                    provider="prestador 1"
+                                    day="15 de Maio"
+                                    hour="16 horas"
+                                />
+                            ))
+                         }
                     </S.List>
                 </S.Section>
                 <S.Section>
                     <h2>Seus pedidos</h2>
                     <S.List>
-                        <Order 
-                            name="Faxina mais que completa"
-                            description="Uma faxina mais que completa"
-                            offers={2}
-                        />
-                        <Order
-                            name="Faxina absoluta"
-                            description="Preciso dizer mais?"
-                            offers={8}
-                        />
+                        {pendingOrders.length === 0 
+                            ?   <S.EmptyContentText>
+                                    Parece que você não tem nenhum pedido pendente
+                                </S.EmptyContentText>
+                            : pendingOrders.map(order => (
+                                <Order 
+                                    name={order.title}
+                                    description={order.description}
+                                />
+                            ))
+                         }
 
                         <Link href="/create-order">
                             <Button>Criar novo pedido</Button>
