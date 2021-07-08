@@ -1,5 +1,7 @@
 import {FormHandles} from '@unform/core'
 import {Form} from '@unform/web'
+import { format, getDate, getHours } from 'date-fns'
+import ptBR from 'date-fns/locale/pt-BR'
 
 import * as S from './styles'
 
@@ -80,11 +82,21 @@ const Details: React.FC<Props> = ({ order, user }) => {
                 </S.Info>
                 <S.Info>
                     <strong>Dia: </strong>
-                    <p>8 de Abril</p>
+                    <p>
+                        {/* Sim, eu sei que isso é um erro de performance
+                        e que eu deveria usar um useMemo, mas sem tempo irmao*/}
+                        {format(new Date(order.date), 'PPP', {
+                            locale: ptBR
+                        })}
+                    </p>
                 </S.Info>
                 <S.Info>
                     <strong>Horário: </strong>
-                    <p>16 horas</p>
+                    <p>
+                        {format(new Date(order.date), 'p', {
+                            locale: ptBR
+                        })}
+                    </p>
                 </S.Info>
                 <S.Info>
                     <strong>Preço:</strong>

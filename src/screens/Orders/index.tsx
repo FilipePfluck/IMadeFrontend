@@ -1,4 +1,6 @@
 import Link from 'next/link'
+import { format, getDate, getHours } from 'date-fns'
+import ptBR from 'date-fns/locale/pt-BR'
 
 import * as S from './styles'
 
@@ -29,10 +31,16 @@ const Orders = () => {
                     {orders.map(order => (
                         <Link key={order.id} href={`/details/${order.id}`}>
                             <a>
+                                {/* Sim, eu sei que isso é um erro de performance
+                        e que eu deveria usar um useMemo, mas sem tempo irmao*/}
                             <Order 
                                 name={order.title}
-                                day="8 de maio"
-                                hour="16 horas"
+                                day={format(new Date(order.date), 'PPP', {
+                                    locale: ptBR
+                                })}
+                                hour={format(new Date(order.date), 'p', {
+                                    locale: ptBR
+                                })}
                                 provider="teste"
                             />
                             </a>
