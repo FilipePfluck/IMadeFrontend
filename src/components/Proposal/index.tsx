@@ -1,6 +1,7 @@
 import React from 'react'
 import { FiStar } from 'react-icons/fi'
 import { useTheme } from 'styled-components'
+import Button from '../Button'
 import * as S from './styles'
 
 interface ProposalProps{
@@ -9,6 +10,7 @@ interface ProposalProps{
     price: number
     comment?: string
     phone: string
+    onClickFunction: ()=>void
 }
 
 const Star = ({isBlue}: {isBlue: boolean}) => {
@@ -22,7 +24,14 @@ const Star = ({isBlue}: {isBlue: boolean}) => {
     )
 }
 
-const Proposal: React.FC<ProposalProps> = ({name, stars, comment, price, phone}) => {
+const Proposal: React.FC<ProposalProps> = ({
+    name, 
+    stars, 
+    comment, 
+    price, 
+    phone, 
+    onClickFunction
+}) => {
     const {colors } = useTheme()
 
     return(
@@ -51,6 +60,9 @@ const Proposal: React.FC<ProposalProps> = ({name, stars, comment, price, phone})
             <S.Comment>
                 {comment}
             </S.Comment>
+            <Button style={{marginTop: 24}} onClick={onClickFunction}>
+                Aceitar
+            </Button>
         </S.Container>
     )
 }

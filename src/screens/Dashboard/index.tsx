@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { format, getDate, getHours } from 'date-fns'
+import ptBR from 'date-fns/locale/pt-BR'
 
 import Link from 'next/link'
 
@@ -20,13 +22,30 @@ const Dashboard = ()=>{
 
     useEffect(()=>{
         api.get(`/orders/accepted/client/${user.client.id}`).then(response => {
-            setAcceptedOrders(response.data)
+            const data = response.data.map(response => {
+                const date = new Date(response.date)
+
+                const day =  format(date, 'PPP', {
+                    locale: ptBR
+                })
+
+                const hour = format(date, 'p', {
+                    locale: ptBR
+                })
+
+                return {
+                    ...response,
+                    day,
+                    hour
+
+                }
+            })
+            setAcceptedOrders(data)
         })
     },[])
 
     useEffect(()=>{
         api.get(`/orders/pending/client/${user.client.id}`).then(response => {
-            console.log(response.data)
             setPendingOrders(response.data)
         })
     },[])
@@ -44,10 +63,10 @@ const Dashboard = ()=>{
                                 </S.EmptyContentText>
                             : acceptedOrders.map(order => (
                                 <Appointment
-                                    name="Faxina simples"
-                                    provider="prestador 1"
-                                    day="15 de Maio"
-                                    hour="16 horas"
+                                    name={order.title}
+                                    provider={order.provider.user.name}
+                                    day={order.day}
+                                    hour={order.hour}
                                 />
                             ))
                          }
@@ -61,10 +80,14 @@ const Dashboard = ()=>{
                                     Parece que você não tem nenhum pedido pendente
                                 </S.EmptyContentText>
                             : pendingOrders.map(order => (
-                                <Order 
-                                    name={order.title}
-                                    description={order.description}
-                                />
+                                <Link href={`/details/${order.id}`}>
+                                    <a>
+                                    <Order 
+                                        name={order.title}
+                                        description={order.description}
+                                    />
+                                    </a>
+                                </Link>
                             ))
                          }
 

@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 import * as S from './styles'
 
 import Header from '../../components/Header'
@@ -25,12 +27,16 @@ const Orders = () => {
                 <S.Title>Pedidos na sua cidade</S.Title>
                 <S.Grid>
                     {orders.map(order => (
-                        <Order 
-                            name={order.title}
-                            day="8 de maio"
-                            hour="16 horas"
-                            provider="teste"
-                        />
+                        <Link key={order.id} href={`/details/${order.id}`}>
+                            <a>
+                            <Order 
+                                name={order.title}
+                                day="8 de maio"
+                                hour="16 horas"
+                                provider="teste"
+                            />
+                            </a>
+                        </Link>
                     ))}
                 </S.Grid>
             </S.Content>

@@ -14,11 +14,11 @@ export type Provider = {
 }
 
 export type User = {
-    id: string
+    user:{id: string
     email: string
     name: string
     is_provider: boolean,
-    phone_number: string
+    phone_number: string}
     client?: Client
     provider?: Provider
 }

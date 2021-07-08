@@ -7,9 +7,7 @@ import ProviderDashboard from '../src/screens/Provider Dashboard'
 import { User } from '../src/types/User'
 
 interface Props {
-  user: {
-    user: User
-  }
+  user: User
 }
 
 export default function DashboardPage ({user}: Props){

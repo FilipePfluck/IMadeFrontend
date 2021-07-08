@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { format, getDate, getHours } from 'date-fns'
+import ptBR from 'date-fns/locale/pt-BR'
 
 import Link from 'next/link'
 
@@ -20,12 +22,34 @@ const ProviderDashboard = ()=>{
 
     useEffect(()=>{
         api.get(`/orders/accepted/provider/${user.provider.id}`).then(response => {
-            setAcceptedOrders(response.data)
+            console.log(response.data)
+
+            const data = response.data.map(response => {
+                const date = new Date(response.date)
+
+                const day =  format(date, 'PPP', {
+                    locale: ptBR
+                })
+
+                const hour = format(date, 'p', {
+                    locale: ptBR
+                })
+
+                return {
+                    ...response,
+                    day,
+                    hour
+
+                }
+            })
+
+            setAcceptedOrders(data)
         })
     },[])
 
     useEffect(()=>{
         api.get(`/offers/pending/provider/${user.provider.id}`).then(response => {
+            console.log(response.data)
             setPendingOffers(response.data)
         })
     },[])
@@ -43,10 +67,10 @@ const ProviderDashboard = ()=>{
                                 </S.EmptyContentText>
                             : acceptedOrders.map(order => (
                                 <Appointment
-                                    name="Faxina simples"
-                                    provider="prestador 1"
-                                    day="15 de Maio"
-                                    hour="16 horas"
+                                    name={order.title}
+                                    provider={order.provider.user.name}
+                                    day={order.day}
+                                    hour={order.hour}
                                 />
                             ))
                          }
@@ -61,8 +85,8 @@ const ProviderDashboard = ()=>{
                                 </S.EmptyContentText>
                             : pendingOffers.map(order => (
                                 <Order 
-                                    name={order.title}
-                                    description={order.description}
+                                    name={order.order.title}
+                                    description={'R$' + order.price}
                                 />
                             ))
                          }
